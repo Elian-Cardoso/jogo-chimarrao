@@ -19,17 +19,15 @@ const items = [
 let currentStep = 1;
 let fixedCards = [];
 let timer;
-let timeLeft = 90; // tempo aumentado para 1min30
+let timeLeft = 90; // 1min30
 let playerName = "";
 let startTime = 0;
 let isClickable = true;
 
-// Shuffle array
 function shuffle(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
-// Render cards
 function renderCards() {
   const container = document.getElementById("cards");
   const fixedContainer = document.getElementById("fixed-cards");
@@ -41,7 +39,6 @@ function renderCards() {
   fixedCards.forEach(item => fixedContainer.appendChild(createCard(item, true)));
 }
 
-// Create a single card
 function createCard(item, revealed) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -64,7 +61,6 @@ function createCard(item, revealed) {
   return card;
 }
 
-// Reveal card on click
 function revealCard(card) {
   if (!isClickable || card.classList.contains("revealed")) return;
   isClickable = false;
@@ -103,7 +99,6 @@ function revealCard(card) {
   }
 }
 
-// Update progress bar
 function updateProgress() {
   const progressBar = document.getElementById("progress-bar");
   const percent = (fixedCards.length / 4) * 100;
@@ -114,7 +109,6 @@ function updateProgress() {
   }
 }
 
-// Timer
 function startTimer() {
   startTime = Date.now();
   const timerEl = document.getElementById("timer");
@@ -132,20 +126,17 @@ function startTimer() {
   }, 1000);
 }
 
-// Finish game
 function finishGame(timeOut) {
   clearInterval(timer);
   const elapsedTime = 90 - timeLeft;
   if (!playerName) playerName = "Anônimo";
 
-  // Salvar jogador no ranking
   saveScore(playerName, elapsedTime);
 
-  // Redirecionar para o Hank (ranking)
+  // Redireciona para Hank
   window.location.href = "hank.html";
 }
 
-// Save score in localStorage
 function saveScore(name, time) {
   let ranking = JSON.parse(localStorage.getItem("ranking")) || [];
   ranking.push({ name, time });
@@ -153,7 +144,6 @@ function saveScore(name, time) {
   localStorage.setItem("ranking", JSON.stringify(ranking));
 }
 
-// Inicialização
 window.onload = () => {
   playerName = localStorage.getItem("playerName") || "Anônimo";
   renderCards();
