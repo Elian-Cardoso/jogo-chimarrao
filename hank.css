@@ -35,18 +35,15 @@ body {
   margin-bottom: 20px;
 }
 
-#ranking-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 20px;
-  text-align: left;
+.instagram-msg {
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-#ranking-list li {
-  margin: 6px 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #006400;
+.insta-icon {
+  width: 24px;
+  vertical-align: middle;
+  margin-left: 5px;
 }
 
 #play-again {
@@ -58,6 +55,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s;
+  margin-top: 20px;
 }
 
 #play-again:hover {
@@ -67,7 +65,7 @@ body {
 @media (max-width: 480px) {
   .hank-box { padding: 20px; }
   .hank-box h1 { font-size: 26px; }
-  #ranking-list li { font-size: 16px; }
   #play-again { font-size: 18px; padding: 8px 16px; }
   .hank-img { width: 100px; }
+  .insta-icon { width: 20px; }
 }
