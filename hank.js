@@ -1,18 +1,17 @@
-// Hank.js – Exibe ranking completo
 window.onload = () => {
   const rankingList = document.getElementById("ranking-list");
   let ranking = JSON.parse(localStorage.getItem("ranking")) || [];
 
-  // Ordenar por menor tempo
+  // Ordena por menor tempo e mantém apenas os 5 melhores
   ranking.sort((a, b) => a.time - b.time);
+  ranking = ranking.slice(0, 5);
+  localStorage.setItem("ranking", JSON.stringify(ranking));
 
-  if (ranking.length === 0) {
-    rankingList.innerHTML = "<li>Nenhum jogador ainda!</li>";
-  } else {
-    rankingList.innerHTML = ranking.map((r, i) => `<li>${i + 1}. ${r.name} - ${r.time}s</li>`).join("");
-  }
+  // Mostra no HTML
+  rankingList.innerHTML = ranking.map((r, i) => `<li>${i+1}. ${r.name} - ${r.time}s</li>`).join("");
 
-  document.getElementById("back-game").addEventListener("click", () => {
+  // Botão para reiniciar o jogo
+  document.getElementById("play-again").addEventListener("click", () => {
     window.location.href = "index.html";
   });
 };
