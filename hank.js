@@ -1,14 +1,11 @@
 window.onload = () => {
-  const rankingList = document.getElementById("ranking-list");
-  let ranking = JSON.parse(localStorage.getItem("ranking")) || [];
+  // Recupera nome e tempo do jogador do localStorage
+  const playerName = localStorage.getItem("playerName") || "Jogador";
+  const playerTime = localStorage.getItem("playerTime") || "0";
 
-  // Ordena por menor tempo e mantém apenas os 5 melhores
-  ranking.sort((a, b) => a.time - b.time);
-  ranking = ranking.slice(0, 5);
-  localStorage.setItem("ranking", JSON.stringify(ranking));
-
-  // Mostra no HTML
-  rankingList.innerHTML = ranking.map((r, i) => `<li>${i+1}. ${r.name} - ${r.time}s</li>`).join("");
+  // Atualiza HTML
+  document.getElementById("player-name").innerText = playerName;
+  document.getElementById("player-time").innerText = playerTime + "s";
 
   // Botão para reiniciar o jogo
   document.getElementById("play-again").addEventListener("click", () => {
