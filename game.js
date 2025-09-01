@@ -131,17 +131,11 @@ function finishGame(timeOut) {
   const elapsedTime = 90 - timeLeft;
   if (!playerName) playerName = "Anônimo";
 
-  saveScore(playerName, elapsedTime);
+  // Salva apenas o nome e tempo para a tela final
+  localStorage.setItem("playerTime", elapsedTime);
 
-  // Redireciona para Hank
+  // Redireciona para Hank (tela de parabéns)
   window.location.href = "hank.html";
-}
-
-function saveScore(name, time) {
-  let ranking = JSON.parse(localStorage.getItem("ranking")) || [];
-  ranking.push({ name, time });
-  ranking.sort((a, b) => a.time - b.time);
-  localStorage.setItem("ranking", JSON.stringify(ranking));
 }
 
 window.onload = () => {
