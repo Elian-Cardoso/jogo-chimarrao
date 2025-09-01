@@ -1,21 +1,26 @@
-window.onload = () => {
-  const lastPlayerInfo = document.getElementById("last-player-info");
-  const topRanking = document.getElementById("top-ranking");
-
-  // Mostrar último jogador
-  const lastScore = JSON.parse(localStorage.getItem("lastScore"));
-  if (lastScore) {
-    lastPlayerInfo.innerText = `${lastScore.name} completou ${lastScore.steps} passo(s) em ${lastScore.time}s ${lastScore.timeout ? "(tempo esgotado)" : ""}`;
-  } else {
-    lastPlayerInfo.innerText = "Nenhum jogo registrado ainda.";
-  }
-
-  // Top 3 jogadores
+// Função para carregar ranking do localStorage
+function loadRanking() {
+  const rankingList = document.getElementById("ranking-list");
   const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
-  topRanking.innerHTML = ranking.slice(0,3).map((r, i) => `<li>${i+1}. ${r.name} - ${r.time}s</li>`).join("");
 
-  // Jogar novamente
-  document.getElementById("play-again").addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
+  // Ordenar por tempo (menor tempo primeiro)
+  ranking.sort((a, b) => a.time - b.time);
+
+  // Pegar apenas os 5 melhores
+  const top5 = ranking.slice(0, 5);
+
+  // Renderizar na tela
+  rankingList.innerHTML = top5
+    .map((player, index) => `<li>${index + 1}. ${player.name} - ${player.time}s</li>`)
+    .join("");
+}
+
+// Botão para reiniciar o jogo
+document.getElementById("play-again").addEventListener("click", () => {
+  window.location.href = "index.html";
+});
+
+// Inicializar
+window.onload = () => {
+  loadRanking();
 };
