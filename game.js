@@ -145,3 +145,4 @@ window.onload = () => {
 };
 
 window.onresize = () => updateProgress();
+
