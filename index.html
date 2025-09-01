@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Algoritmo do Chimarrão</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="start.css">
+</head>
+<body>
+  <section class="start-screen">
+    <div class="start-box">
+      <h1 class="game-title">Algoritmo<br> do <br> Chimarrão</h1>
+      <div class="title-bar"></div>
+      <p class="welcome-text">Bem-vindo!<br>Prepare-se para montar o mate na ordem correta!</p>
+
+      <!-- Input para nome -->
+      <input type="text" id="player-name" placeholder="Digite seu nome" class="name-input">
+      <a href="#" id="start-game" class="start-btn">Iniciar Jogo</a>
+    </div>
+  </section>
+
+  <script>
+    const startBtn = document.getElementById("start-game");
+    const nameInput = document.getElementById("player-name");
+
+    startBtn.addEventListener("click", () => {
+      const name = nameInput.value.trim();
+      if (!name) {
+        alert("Por favor, digite seu nome antes de iniciar!");
+        nameInput.focus();
+        return;
+      }
+      localStorage.setItem("playerName", name);
+      window.location.href = "game.html";
+    });
+
+    nameInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") startBtn.click();
+    });
+  </script>
+</body>
+</html>

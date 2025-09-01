@@ -1,0 +1,56 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0e4d7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.hank-area {
+  text-align: center;
+  background: rgba(255,255,255,0.95);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.hank-area h1 {
+  color: #8B0000;
+}
+
+.last-player, .top-players {
+  margin: 20px 0;
+}
+
+#top-ranking {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+#top-ranking li {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+button#play-again {
+  padding: 12px 24px;
+  background-color: #228B22;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+button#play-again:hover {
+  background-color: #006400;
+}

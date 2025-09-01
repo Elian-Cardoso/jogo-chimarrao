@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo do Chimarrão</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Área do jogo -->
+  <section class="game-area">
+    <!-- Barra de progresso -->
+    <div id="progress-container" class="progress-container">
+      <div id="progress-bar" class="progress-bar"></div>
+    </div>
+
+    <!-- Cards e feedback -->
+    <div class="cards-section">
+      <div id="cards" class="cards"></div>
+      <p id="feedback" class="feedback"></p>
+      <p id="timer" class="timer"></p>
+    </div>
+
+    <!-- Cards já selecionados -->
+    <div id="fixed-cards" class="fixed-cards-vertical"></div>
+  </section>
+
+  <script src="game.js"></script>
+</body>
+</html>
