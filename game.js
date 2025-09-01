@@ -19,17 +19,13 @@ const items = [
 let currentStep = 1;
 let fixedCards = [];
 let timer;
-let timeLeft = 60;
+let timeLeft = 90; // Tempo ajustado para 1:30
 let playerName = "";
 let startTime = 0;
 let isClickable = true;
 
-// Shuffle array
-function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
+function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
 
-// Render cards
 function renderCards() {
   const container = document.getElementById("cards");
   const fixedContainer = document.getElementById("fixed-cards");
@@ -41,7 +37,6 @@ function renderCards() {
   fixedCards.forEach(item => fixedContainer.appendChild(createCard(item, true)));
 }
 
-// Create a single card
 function createCard(item, revealed) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -60,11 +55,9 @@ function createCard(item, revealed) {
   if (!revealed) {
     card.addEventListener("click", () => revealCard(card));
   }
-
   return card;
 }
 
-// Reveal card
 function revealCard(card) {
   if (!isClickable || card.classList.contains("revealed")) return;
   isClickable = false;
@@ -81,40 +74,25 @@ function revealCard(card) {
     currentStep++;
     updateProgress();
     setTimeout(() => {
-      if (currentStep > 4) finishGame(false);
-      else {
-        renderCards();
-        isClickable = true;
-      }
+      if (currentStep > 4) finishGame();
+      else { renderCards(); isClickable = true; }
     }, 500);
   } else if (correct && order !== currentStep) {
     feedback.innerText = "Hmmmm, quase lá, é o próximo!";
-    setTimeout(() => {
-      card.classList.remove("revealed");
-      isClickable = true;
-    }, 1000);
+    setTimeout(() => { card.classList.remove("revealed"); isClickable = true; }, 1000);
   } else {
     feedback.innerText = "Esse não entra no chimarrão, tente outro!";
-    setTimeout(() => {
-      card.classList.remove("revealed");
-      renderCards();
-      isClickable = true;
-    }, 1000);
+    setTimeout(() => { card.classList.remove("revealed"); renderCards(); isClickable = true; }, 1000);
   }
 }
 
-// Update progress
 function updateProgress() {
   const progressBar = document.getElementById("progress-bar");
   const percent = (fixedCards.length / 4) * 100;
-  if (window.innerWidth >= 900) {
-    progressBar.style.height = `${percent}%`;
-  } else {
-    progressBar.style.width = `${percent}%`;
-  }
+  if (window.innerWidth >= 900) progressBar.style.height = `${percent}%`;
+  else progressBar.style.width = `${percent}%`;
 }
 
-// Timer
 function startTimer() {
   startTime = Date.now();
   const timerEl = document.getElementById("timer");
@@ -122,42 +100,30 @@ function startTimer() {
 
   timer = setInterval(() => {
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    timeLeft = Math.max(60 - elapsed, 0);
+    timeLeft = Math.max(90 - elapsed, 0); // 90 segundos
     timerEl.innerText = `Tempo restante: ${timeLeft}s`;
 
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      finishGame(true);
-    }
+    if (timeLeft <= 0) { clearInterval(timer); finishGame(); }
   }, 1000);
 }
 
-// Finish game: redireciona para hank.html
-function finishGame(timeOut) {
+function finishGame() {
   clearInterval(timer);
-  const elapsedTime = 60 - timeLeft;
+  const elapsedTime = 90 - timeLeft;
   if (!playerName) playerName = "Anônimo";
 
-  localStorage.setItem("lastScore", JSON.stringify({
-    name: playerName,
-    time: elapsedTime,
-    steps: fixedCards.length,
-    timeout: timeOut
-  }));
+  // Salvar jogador no ranking (todos)
+  let ranking = JSON.parse(localStorage.getItem("ranking")) || [];
+  ranking.push({ name: playerName, time: elapsedTime });
+  ranking.sort((a, b) => a.time - b.time);
+  localStorage.setItem("ranking", JSON.stringify(ranking));
 
+  // Redireciona para hank.html
   window.location.href = "hank.html";
 }
 
-// Inicialização
 window.onload = () => {
-  if (!localStorage.getItem("playerName")) {
-    playerName = prompt("Bah guri(a), me diga seu nome?") || "Anônimo";
-    localStorage.setItem("playerName", playerName);
-  } else {
-    playerName = localStorage.getItem("playerName");
-  }
-
-  document.getElementById("feedback").innerText = "Bah guri(a), boa sorte!";
+  playerName = localStorage.getItem("playerName") || "Anônimo";
   renderCards();
   startTimer();
 };
