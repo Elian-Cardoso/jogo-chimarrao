@@ -4,24 +4,34 @@ body {
   padding: 0;
   background: #f0e4d7;
   color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .hank-screen {
-  text-align: center;
-  background: rgba(255,255,255,0.95);
-  padding: 30px 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  max-width: 400px;
-  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #006400, #ffd700, #8B0000);
 }
 
-.hank-screen h1 {
+.hank-box {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  max-width: 400px;
+  width: 100%;
+}
+
+.hank-box h1 {
+  font-size: 32px;
   color: #8B0000;
+  margin-bottom: 20px;
+}
+
+.hank-img {
+  width: 120px;
   margin-bottom: 20px;
 }
 
@@ -29,25 +39,35 @@ body {
   list-style: none;
   padding: 0;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 #ranking-list li {
   margin: 6px 0;
+  font-size: 18px;
   font-weight: bold;
-  font-size: 16px;
+  color: #006400;
 }
 
-#back-game {
+#play-again {
+  font-size: 20px;
   padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  background: #228B22;
+  background-color: #228B22;
   color: #fff;
-  font-weight: bold;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-#back-game:hover {
-  background: #006400;
+#play-again:hover {
+  background-color: #006400;
+}
+
+@media (max-width: 480px) {
+  .hank-box { padding: 20px; }
+  .hank-box h1 { font-size: 26px; }
+  #ranking-list li { font-size: 16px; }
+  #play-again { font-size: 18px; padding: 8px 16px; }
+  .hank-img { width: 100px; }
 }
