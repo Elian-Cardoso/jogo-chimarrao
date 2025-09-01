@@ -1,56 +1,91 @@
-body {
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
   font-family: Arial, sans-serif;
   background: #f0e4d7;
   color: #333;
-  margin: 0;
-  padding: 0;
+}
+
+/* Tela central */
+.hank-screen {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  background: linear-gradient(135deg, #006400, #ffd700, #8B0000);
 }
 
-.hank-area {
+/* Box do ranking */
+.hank-box {
   text-align: center;
-  background: rgba(255,255,255,0.95);
-  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px 50px;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
   max-width: 400px;
   width: 90%;
 }
 
-.hank-area h1 {
+/* Título */
+.hank-box h1 {
   color: #8B0000;
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
-.last-player, .top-players {
-  margin: 20px 0;
-}
-
-#top-ranking {
+/* Lista de ranking */
+#ranking-list {
   list-style: none;
   padding: 0;
-  text-align: left;
+  margin-bottom: 25px;
 }
 
-#top-ranking li {
-  margin: 5px 0;
+#ranking-list li {
+  font-size: 18px;
   font-weight: bold;
+  margin: 8px 0;
+  color: #006400;
 }
 
-button#play-again {
-  padding: 12px 24px;
-  background-color: #228B22;
-  color: white;
+/* Botão de jogar novamente */
+#play-again {
+  padding: 12px 28px;
+  font-size: 20px;
+  font-weight: bold;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
   cursor: pointer;
-  margin-top: 20px;
+  background-color: #228B22;
+  color: #fff;
   transition: background 0.3s;
 }
 
-button#play-again:hover {
+#play-again:hover {
   background-color: #006400;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .hank-box {
+    padding: 20px 25px;
+  }
+
+  .hank-box h1 {
+    font-size: 28px;
+  }
+
+  #ranking-list li {
+    font-size: 16px;
+  }
+
+  #play-again {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
 }
